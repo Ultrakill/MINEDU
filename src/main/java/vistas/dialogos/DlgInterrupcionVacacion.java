@@ -241,7 +241,7 @@ public class DlgInterrupcionVacacion extends javax.swing.JDialog {
         
         for (Vacacion v : vacaciones) {
             Date fechaInicio = v.getFechaInicio();
-            Date fechaFin = v.isHayInterrupcion() ? v.getFechaInterrupcion() : v.getFechaFin();
+            Date fechaFin = v.getHayInterrupcion() ? v.getFechaInterrupcion() : v.getFechaFin();
 
             while (fechaInicio.compareTo(fechaFin) <= 0) {
                 cal.setTime(fechaInicio);

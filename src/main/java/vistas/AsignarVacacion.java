@@ -43,6 +43,7 @@ import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.swingbinding.JComboBoxBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import utiles.UsuarioActivo;
+import vistas.dialogos.DlgReprogramarVacacion;
 
 /**
  *
@@ -89,6 +90,7 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new org.jdesktop.swingx.JXTable();
         lblBusqueda = new org.jdesktop.swingx.JXBusyLabel();
@@ -138,10 +140,7 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
 
         pnlListado.setBorder(javax.swing.BorderFactory.createTitledBorder("Vacaciones asignadas"));
-        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-        jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0};
-        pnlListado.setLayout(jPanel1Layout);
+        pnlListado.setLayout(new java.awt.GridBagLayout());
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
@@ -177,10 +176,20 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
         });
         jPanel3.add(jButton3);
 
+        jButton6.setText("Reprogramar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton6);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 50, 7, 128);
         pnlListado.add(jPanel3, gridBagConstraints);
 
         tblTabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,17 +202,24 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridwidth = 14;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.ipadx = 808;
+        gridBagConstraints.ipady = 428;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 6, 0, 0);
         pnlListado.add(jScrollPane1, gridBagConstraints);
 
         lblBusqueda.setText("Empleado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 6, 0, 0);
         pnlListado.add(lblBusqueda, gridBagConstraints);
 
         txtEmpleado.setEditable(false);
@@ -213,10 +229,13 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 249;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 5, 0, 0);
         pnlListado.add(txtEmpleado, gridBagConstraints);
 
         jButton4.setText("...");
@@ -226,9 +245,12 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 5, 0, 0);
         pnlListado.add(jButton4, gridBagConstraints);
 
         btnLimpiar.setText("Limpiar");
@@ -238,16 +260,22 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 5, 0, 0);
         pnlListado.add(btnLimpiar, gridBagConstraints);
 
         jLabel9.setText("-");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 5, 0, 0);
         pnlListado.add(jLabel9, gridBagConstraints);
 
         btnBuscar.setText("Buscar");
@@ -257,9 +285,12 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 14;
+        gridBagConstraints.gridx = 13;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 117, 0, 0);
         pnlListado.add(btnBuscar, gridBagConstraints);
 
         pnlNavegacion.setLayout(new java.awt.GridLayout(1, 0, 2, 0));
@@ -323,17 +354,26 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
         pnlNavegacion.add(cboTamanio);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 15;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 123, 0, 0);
         pnlListado.add(pnlNavegacion, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(19, 5, 0, 0);
         pnlListado.add(dcFechaInicio1, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(19, 5, 0, 0);
         pnlListado.add(dcFechaFin1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -746,6 +786,25 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmpleadoSeleccionadoActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        int fila = tblTabla.getSelectedRow();
+        if(fila != -1){
+            Vacacion vacacion = this.listado.get(fila);
+            DlgReprogramarVacacion reprogramar = new DlgReprogramarVacacion(this, vacacion);            
+            reprogramar.setVisible(true);
+            this.buscarVacacion();
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void buscarVacacion(){
+        System.out.println("BUSCAR");
+        lblBusqueda.setBusy(true);
+        paginaActual = 1;
+        buscar();
+        actualizarControlesNavegacion();
+        lblBusqueda.setBusy(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
@@ -768,6 +827,7 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1103,7 +1163,7 @@ public class AsignarVacacion extends javax.swing.JInternalFrame {
         
         for (Vacacion vacacion : vacaciones) {
             Date fechaInicio = vacacion.getFechaInicio();
-            Date fechaFin = vacacion.isHayInterrupcion() ? vacacion.getFechaInterrupcion() : vacacion.getFechaFin();
+            Date fechaFin = vacacion.getHayInterrupcion() ? vacacion.getFechaInterrupcion() : vacacion.getFechaFin();
 
             while (fechaInicio.compareTo(fechaFin) <= 0) {
                 cal.setTime(fechaInicio);

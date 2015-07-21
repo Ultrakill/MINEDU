@@ -71,15 +71,37 @@ public class VacacionControlador extends Controlador<Vacacion> {
         return this.getDao().contar(jpql, mapa);
     }
 
-    public Vacacion buscarXDia(String dni, Date dia) {
+//    public Vacacion buscarXDia(String dni, Date dia) {
+//        String jpql = "SELECT v FROM Vacacion v"
+//                + " WHERE v.empleado = :dni"
+//                + " AND ("
+//                + "(v.hayInterrupcion = FALSE AND :dia BETWEEN v.fechaInicio AND v.fechaFin) OR "
+//                + "(v.hayInterrupcion = TRUE AND :dia BETWEEN v.fechaInicio AND v.fechaInterrupcion)"
+//                + ")";
+//        Map<String, Object> mapa = new HashMap<>();
+//        mapa.put("dni", dni);
+//        mapa.put("dia", dia);
+//        List<Vacacion> vacacion = this.getDao().buscar(jpql, mapa, -1, 1);
+//        if (vacacion.isEmpty()) {
+//            return null;
+//        } else {
+//            return vacacion.get(0);
+//        }
+//    }
+    
+    public Vacacion buscarXDia(String empleado, Date dia) {
         String jpql = "SELECT v FROM Vacacion v"
-                + " WHERE v.empleado = :dni"
-                + " AND ("
-                + "(v.hayInterrupcion = FALSE AND :dia BETWEEN v.fechaInicio AND v.fechaFin) OR "
-                + "(v.hayInterrupcion = TRUE AND :dia BETWEEN v.fechaInicio AND v.fechaInterrupcion)"
+                + " WHERE v.empleado = :dni "
+                + " AND ( "
+                + "(v.fechaInterrupcion IS NULL AND :dia BETWEEN v.fechaInicio AND v.fechaFin) OR "
+                + "(v.fechaInterrupcion IS NOT NULL AND :dia >= v.fechaInicio AND :dia < v.fechaInterrupcion)"
+                + ") AND ("
+                + "v.interrupcionVacacion IS NULL OR (v.interrupcionVacacion IS NOT NULL AND "
+                + "((:dia >= v.fechaInicio AND :dia < v.interrupcionVacacion.fechaInicio) OR (:dia > v.interrupcionVacacion.fechaFin AND :dia <= v.fechaFin))"
+                + ")"
                 + ")";
         Map<String, Object> mapa = new HashMap<>();
-        mapa.put("dni", dni);
+        mapa.put("dni", empleado);
         mapa.put("dia", dia);
         List<Vacacion> vacacion = this.getDao().buscar(jpql, mapa, -1, 1);
         if (vacacion.isEmpty()) {

@@ -537,7 +537,7 @@ public class ImportarVacaciones extends javax.swing.JInternalFrame {
         
         for (Vacacion vacacion : vacaciones) {
             Date fechaInicio = vacacion.getFechaInicio();
-            Date fechaFin = vacacion.isHayInterrupcion() ? vacacion.getFechaInterrupcion() : vacacion.getFechaFin();
+            Date fechaFin = vacacion.getHayInterrupcion() ? vacacion.getFechaInterrupcion() : vacacion.getFechaFin();
 
             while (fechaInicio.compareTo(fechaFin) <= 0) {
                 cal.setTime(fechaInicio);

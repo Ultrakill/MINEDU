@@ -3,6 +3,7 @@ package entidades;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,10 @@ public class Vacacion implements Serializable {
     @Column(name = "empleado_nro_documento", unique = false, updatable = true, insertable = true, nullable = false, length = 255, scale = 0, precision = 0)
     @Basic
     private String empleado;
+//    @ManyToOne(targetEntity = Empleado.class)
+//    @JoinColumn(name = "empleado_nro_documento",referencedColumnName = "nro_documento")
+//    private Empleado empleado;
+    
     @Column(unique = false, updatable = true, insertable = true, nullable = true, length = 255, scale = 0, precision = 0)
     @Basic
     private String documento;
@@ -62,13 +67,15 @@ public class Vacacion implements Serializable {
      */
     @Column(name = "hay_reprogramacion")
     private boolean hayReprogramacion;
-    @JoinColumn(name="vacacion_id",referencedColumnName="id")
+    @JoinColumn(name = "vacacion_id", referencedColumnName = "id")
     @OneToOne(optional = true, targetEntity = Vacacion.class)
     private Vacacion vacacionOrigen;
+    @OneToOne(mappedBy = "vacacionOrigen", targetEntity = Vacacion.class, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Vacacion vacacionReprogramacion;
     @Column(name = "documento_reprogramacion")
     private String documentoReprogramacion;
 
-    public boolean isHayReprogramacion() {
+    public boolean getHayReprogramacion() {
         return hayReprogramacion;
     }
 
@@ -91,8 +98,6 @@ public class Vacacion implements Serializable {
     public void setDocumentoReprogramacion(String documentoReprogramacion) {
         this.documentoReprogramacion = documentoReprogramacion;
     }
-    
-    
 
     public Vacacion() {
 
@@ -130,7 +135,7 @@ public class Vacacion implements Serializable {
         this.documento = documento;
     }
 
-    public boolean isHayInterrupcion() {
+    public boolean getHayInterrupcion() {
         return this.hayInterrupcion;
     }
 
@@ -185,6 +190,13 @@ public class Vacacion implements Serializable {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
-    
-    
+
+    public Vacacion getVacacionReprogramacion() {
+        return vacacionReprogramacion;
+    }
+
+    public void setVacacionReprogramacion(Vacacion vacacionReprogramacion) {
+        this.vacacionReprogramacion = vacacionReprogramacion;
+    }
+
 }
