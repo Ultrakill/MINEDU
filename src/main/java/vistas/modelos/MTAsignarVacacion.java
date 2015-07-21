@@ -55,6 +55,8 @@ public class MTAsignarVacacion extends ModeloTabla<Vacacion>{
         switch(columnIndex){
             case 3:
                 return Boolean.class;
+            case 5:
+                return Boolean.class;
             default:
                 return String.class;
         }
